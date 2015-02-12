@@ -1,0 +1,17 @@
+{
+  "name": "viddie-edison",
+  "version": "0.0.0",
+  "description": "viddie-edison =============",
+  "main": "viddie.js",
+  "scripts": {
+    "start": "node viddie.js"
+  },  
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cylon-intel-iot": "*",
+    "cylon-opencv": "*",
+    "cylon-api-http": "*"
+  }
+}
+
