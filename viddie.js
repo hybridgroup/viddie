@@ -20,7 +20,7 @@ Cylon.robot({
     my.camera.once("cameraReady", function() {
       console.log("The camera is ready!");
 
-      every(300, function(){                             
+      every(100, function(){                             
         my.buzzer.turnOff();                             
         my.camera.readFrame();                           
       });
