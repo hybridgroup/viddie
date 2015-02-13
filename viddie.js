@@ -5,7 +5,7 @@ Cylon.robot({
     edison: { adaptor: 'intel-iot' },
     opencv: { adaptor: "opencv" },
     mqtt: { adaptor: "mqtt", 
-            host: process.env.MECHANOID_MQTT_BROKER + 
+            host: "mqtt://" + process.env.MECHANOID_MQTT_BROKER + 
               ":" + process.env.MECHANOID_MQTT_BROKER_PORT,
             username: process.env.MECHANOID_MQTT_USER,
             password: process.env.MECHANOID_MQTT_PASSWORD },
