@@ -5,9 +5,9 @@ Cylon.robot({
     edison: { adaptor: 'intel-iot' },
     opencv: { adaptor: "opencv" },
     mqtt: { adaptor: "mqtt", 
-            host: process.env.MQTT_BROKER,
-            username: process.env.MQTT_USER,
-            password: process.env.MQTT_PASSWORD },
+            host: process.env.MECHANOID_MQTT_BROKER,
+            username: process.env.MECHANOID_MQTT_USER,
+            password: process.env.MECHANOID_MQTT_PASSWORD },
   },
 
   devices: {
@@ -26,19 +26,9 @@ Cylon.robot({
 
       every(100, function(){                             
         my.buzzer.turnOff();
-        my.mqtt.publish(process.env.MQTT_BASE_TOPIC + "/blink", "0");
+        my.mqtt.publish(process.env.MECHANOID_MQTT_BASE_TOPIC + "/blink", "0");
         my.camera.readFrame();                           
       });
-    });
-
-    my.camera.on("facesDetected", function(err, im, faces) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      my.buzzer.turnOn();
-      my.mqtt.publish(process.env.MQTT_BASE_TOPIC + "/blink", "1");
-      my.camera.readFrame();
     });
 
     my.camera.on("frameReady", function(err, im) {
@@ -49,5 +39,15 @@ Cylon.robot({
 
       my.camera.detectFaces(im);
     });    
+
+    my.camera.on("facesDetected", function(err, im, faces) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      my.buzzer.turnOn();
+      my.mqtt.publish(process.env.MECHANOID_MQTT_BASE_TOPIC + "/blink", "1");
+      my.camera.readFrame();
+    });
   }
 }).start();
